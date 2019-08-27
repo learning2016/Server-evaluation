@@ -87,7 +87,7 @@ if  [ ! -e '/tmp/AWS-ping.py' ]; then
     wget -N --no-check-certificate https://raw.githubusercontent.com/learning2016/Server-evaluation/master/AWS-ping.py > /dev/null 2>&1
     cd $dir
 fi
-chmod a+rx /tmp/AWS-ping.py.py
+chmod a+rx /tmp/AWS-ping.py
 
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
