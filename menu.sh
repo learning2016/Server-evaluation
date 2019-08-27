@@ -20,7 +20,7 @@ read -p "请输入对应产品的数字：" num1
 case $num1 in
     1)
       clear
-      yum -y install gcc automake autoconf libtool make perl-Time-HiRes perl
+      yum -y install gcc automake autoconf libtool make perl-Time-HiRes perl sysbench
       wget https://download.laobuluo.com/tools/UnixBench5.1.3.tgz
       tar -zxvf UnixBench5.1.3.tgz
       cd UnixBench
