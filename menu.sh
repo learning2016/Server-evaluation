@@ -13,6 +13,14 @@ function Test_environment_initialization() {
       tar -zxvf UnixBench5.1.3.tgz
       cd UnixBench
       make
+      cd $pwd
+      wget https://codeload.github.com/akopytov/sysbench/tar.gz/1.0.17
+      tar -zxvf 1.0.17 -C /usr/local/
+      cd /usr/local/sysbench-1.0.17
+      ./autogen.sh
+      ./configure --without-mysql
+      make -j
+      make install
 
 #安装获取服务器软件、硬件信息的脚本。
       if  [ ! -e '/tmp/systeminfo.sh' ]; then
