@@ -149,7 +149,6 @@ function Grading_test () {
 	
 function A_key_test () {
       screen iotest
-      Test_environment_initialization
       Get_hardware_and_software_information
       printf '%80s\n' | tr ' ' -
       Network_delay_test
