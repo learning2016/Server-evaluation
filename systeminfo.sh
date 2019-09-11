@@ -50,7 +50,7 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
 fi
 
 # Install uuid
-echo "Installing uuid......"
+#echo "Installing uuid......"
 if [ "${release}" == "centos" ]; then
     yum -y install uuid > /dev/null 2>&1
 else
@@ -59,7 +59,7 @@ fi
 
 
 # Install curl
-echo "Installing curl......"
+#echo "Installing curl......"
 if [ "${release}" == "centos" ]; then
     yum -y install curl > /dev/null 2>&1
 else
