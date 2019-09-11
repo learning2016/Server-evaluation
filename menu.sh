@@ -8,7 +8,8 @@ pwd=/tmp
 function Test_environment_initialization() {
       dir=$(pwd)
       cd $pwd
-      yum -y install gcc automake autoconf libtool make perl-Time-HiRes perl
+      yum -y install gcc automake autoconf libtool make perl-Time-HiRes perl wget vim screen
+      cd $pwd
       wget https://download.laobuluo.com/tools/UnixBench5.1.3.tgz
       tar -zxvf UnixBench5.1.3.tgz
       cd UnixBench
@@ -54,7 +55,7 @@ function Network_delay_test () {
 
 function The_CPU_test () {
       #printf "正在测试，请耐心等待"
-      /usr/local/bin/sysbench cpu --cpu-max-prime=20000 --threads=2 run > /tmp/cpu.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench cpu --cpu-max-prime=20000 --threads=2 run > /tmp/cpu.log 2>&1
       #clear
       name13=测试计算素数所需要时间
       name14=$(cat /tmp/cpu.log |grep "total time:")
@@ -65,8 +66,7 @@ function The_CPU_test () {
 
 function The_memory_test () {
       #printf "正在测试，请耐心等待"
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run  > /tmp/memory.log 2>&1
-      #clear
+      /usr/local/sysbench-1.0.17/src/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run  > /tmp/memory.log 2>&1
       name15=内存读写性能
       name16=$(cat /tmp/memory.log |grep "transferred")
       str8=$name15$name16
@@ -77,34 +77,34 @@ function The_memory_test () {
 function Disk_test () {
       #printf "正在测试，请耐心等待，大约30分钟"
       #rndrw 混合随机读/写
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrw prepare > /tmp/rndrw-prepare.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrw run > /tmp/rndrw-run.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrw cleanup > /tmp/rndrw-cleanup.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrw prepare > /tmp/rndrw-prepare.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrw run > /tmp/rndrw-run.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrw cleanup > /tmp/rndrw-cleanup.log 2>&1
       
       #rndwr 随机写入
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndwr prepare > /tmp/rndwr-prepare.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndwr run > /tmp/rndwr-run.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndwr cleanup > /tmp/rndwr-cleanup.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndwr prepare > /tmp/rndwr-prepare.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndwr run > /tmp/rndwr-run.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndwr cleanup > /tmp/rndwr-cleanup.log 2>&1
       
       #rndrd 随机读取
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrd prepare > /tmp/rndrd-prepare.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrd run > /tmp/rndrd-run.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrd cleanup > /tmp/rndrd-cleanup.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrd prepare > /tmp/rndrd-prepare.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrd run > /tmp/rndrd-run.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=rndrd cleanup > /tmp/rndrd-cleanup.log 2>&1
       
       #seqrd 顺序读取
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrd prepare > /tmp/seqrd-prepare.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrd run > /tmp/seqrd-run.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrd cleanup > /tmp/seqrd-cleanup.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrd prepare > /tmp/seqrd-prepare.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrd run > /tmp/seqrd-run.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrd cleanup > /tmp/seqrd-cleanup.log 2>&1
       
       #seqrewr 顺序读写
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrewr prepare > /tmp/seqrewr-prepare.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrewr run > /tmp/seqrewr-run.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrewr cleanup > /tmp/seqrewr-cleanup.log 2>&1
+      #/usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrewr prepare > /tmp/seqrewr-prepare.log 2>&1
+      #/usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrewr run > /tmp/seqrewr-run.log 2>&1
+      #/usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqrewr cleanup > /tmp/seqrewr-cleanup.log 2>&1
       
       #seqwr 顺序写入
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqwr prepare > /tmp/seqwr-prepare.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqwr run > /tmp/seqwr-run.log 2>&1
-      /usr/local/bin/sysbench --test=memory --memory-block-size=8K --memory-total-size=4G --num-threads=2 run --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqwr cleanup > /tmp/seqwr-cleanup.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqwr prepare > /tmp/seqwr-prepare.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqwr run > /tmp/seqwr-run.log 2>&1
+      /usr/local/sysbench-1.0.17/src/sysbench --test=fileio --num-threads=16 --file-total-size=3G --file-test-mode=seqwr cleanup > /tmp/seqwr-cleanup.log 2>&1
       
       #clear
       name1=顺序写入速度
@@ -112,10 +112,10 @@ function Disk_test () {
       str1=$name1$name2
       echo $str1
       
-      name3=顺序读写速度
-      name4=$(cat /tmp/seqrewr-run.log |grep "written, MiB/s:")
-      str2=$name3$name4
-      echo $str2
+      #name3=顺序读写速度
+      #name4=$(cat /tmp/seqrewr-run.log |grep "written, MiB/s:")
+      #str2=$name3$name4
+      #echo $str2
       
       name5=顺序读取速度
       name6=$(cat /tmp/seqrd-run.log |grep "read, MiB/s:")
@@ -139,8 +139,6 @@ function Disk_test () {
 }
 
 function Grading_test () {
-      #printf "正在测试，请耐心等待，大约30分钟"
-      #clear
       cd /tmp/UnixBench
       ./Run > /tmp/unixbench.log 2>&1
       name17=评分
@@ -150,14 +148,20 @@ function Grading_test () {
 }
 	
 function A_key_test () {
-    Test_environment_initialization
-    Get_hardware_and_software_information
-    Network_delay_test
-    The_CPU_test
-    The_memory_test
-    Disk_test
-    Grading_test
-    A_key_test
+      screen iotest
+      Test_environment_initialization
+      Get_hardware_and_software_information
+      printf '%80s\n' | tr ' ' -
+      Network_delay_test
+      printf '%80s\n' | tr ' ' -
+      The_CPU_test
+      printf '%80s\n' | tr ' ' -
+      The_memory_test
+      printf '%80s\n' | tr ' ' -
+      Disk_test
+      printf '%80s\n' | tr ' ' -
+      Grading_test
+      printf '%80s\n' | tr ' ' -
 }
 
 function menu ()
@@ -171,9 +175,9 @@ function menu ()
 `echo -e "\033[33m 3)网络延迟测试\033[0m"`
 `echo -e "\033[33m 4)CPU测试\033[0m"`
 `echo -e "\033[33m 5)内存测试\033[0m"`
-`echo -e "\033[33m 6)磁盘IO测试\033[0m"`
-`echo -e "\033[33m 7)评分测试\033[0m"`
-`echo -e "\033[33m 8)一键测试\033[0m"`
+`echo -e "\033[33m 6)磁盘IO测试(预估至少30分钟)\033[0m"`
+`echo -e "\033[33m 7)评分测试(预估至少45分钟)\033[0m"`
+`echo -e "\033[33m 8)一键测试(预估至少75分钟)\033[0m"`
 `echo -e "\033[33m 9)退出\033[0m"`
 EOF
 read -p "请输入对应产品的数字：" num1
