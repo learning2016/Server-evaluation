@@ -225,8 +225,6 @@ case $num1 in
       ;;
 #以上功能，一键完成。
     8)
-      clear
-      printf "正在测试，请耐心等待，大约60分钟"	
       A_key_test
       menu
       ;;
