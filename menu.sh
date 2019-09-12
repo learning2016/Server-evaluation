@@ -25,7 +25,7 @@ function Test_environment_initialization() {
       make
 
       cd $pwd
-      if [ -s sysbench-1.0.17.tar.gz]; then
+      if [ -s 1.0.17]; then
            echo "sysbench-1.0.17.tar.gz [fonud]"
       else
            echo "sysbench-1.0.17.tar.gz not found!!!download now..."
