@@ -34,7 +34,7 @@ PLAIN='\033[0m'
 
 rm -rf /tmp/report && mkdir /tmp/report
 
-echo "正在安装，请耐心等待..."
+echo "正在测试，请耐心等待..."
 
 
 
