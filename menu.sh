@@ -1,5 +1,6 @@
 #!/bin/sh
 #Shell menu
+#author qinliang
 # Check if user is root
 [ $(id -u) != "0" ] && { echo "${CFAILURE}Error: You must be root to run this script${CEND}"; exit 1; }
 pwd=/tmp
