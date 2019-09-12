@@ -9,14 +9,23 @@ function Test_environment_initialization() {
       dir=$(pwd)
       cd $pwd
       yum -y install gcc automake autoconf libtool make perl-Time-HiRes perl wget vim screen
+      
       cd $pwd
-      wget https://github.com/qcsuper/byte-unixbench/releases/download/v5.1.4/UnixBench-5.1.4.tar.gz
+      if [ -s UnixBench-5.1.4.tar.gz ]; then
+          echo "UnixBench-5.1.4.tar.gz [found]"
+      else
+          echo "UnixBench-5.1.4.tar.gz not found!!!download now..."
+          if ! wget -c https://github.com/qcsuper/byte-unixbench/releases/download/v5.1.4/UnixBench-5.1.4.tar.gz; then
+              echo "Failed to download UnixBench-5.1.4.tar.gz, please download it to ${cur_dir} directory manually and try again."
+              exit 1
+          fi
+      fi
       tar -zxvf UnixBench-5.1.4.tar.gz && rm -f UnixBench-5.1.4.tar.gz
-      cd UnixBench
+      cd UnixBench/
       make
 
       cd $pwd
-      if [ -s 1.0.17]; then
+      if [ -s sysbench-1.0.17.tar.gz]; then
            echo "sysbench-1.0.17.tar.gz [fonud]"
       else
            echo "sysbench-1.0.17.tar.gz not found!!!download now..."
