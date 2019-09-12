@@ -9,24 +9,23 @@ function Test_environment_initialization() {
       dir=$(pwd)
       cd $pwd
       yum -y install gcc automake autoconf libtool make perl-Time-HiRes perl wget vim screen
-      
       cd $pwd
-      if [ -s UnixBench-5.1.4.tar.gz ]; then
-          echo "UnixBench-5.1.4.tar.gz [found]"
-      else
-          echo "UnixBench-5.1.4.tar.gz not found!!!download now..."
-          if ! wget -c https://github.com/qcsuper/byte-unixbench/releases/download/v5.1.4/UnixBench-5.1.4.tar.gz; then
-              echo "Failed to download UnixBench-5.1.4.tar.gz, please download it to ${cur_dir} directory manually and try again."
-              exit 1
-          fi
-      fi
+      wget https://github.com/qcsuper/byte-unixbench/releases/download/v5.1.4/UnixBench-5.1.4.tar.gz
       tar -zxvf UnixBench-5.1.4.tar.gz && rm -f UnixBench-5.1.4.tar.gz
-      cd UnixBench/
+      cd UnixBench
       make
 
       cd $pwd
-      wget https://codeload.github.com/akopytov/sysbench/tar.gz/1.0.17
-      tar -zxvf 1.0.17 -C /usr/local/
+      if [ -s sysbench-1.0.17.tar.gz]; then
+           echo "sysbench-1.0.17.tar.gz [fonud]"
+      else
+           echo "sysbench-1.0.17.tar.gz not found!!!download now..."
+           if ! wget -c https://codeload.github.com/akopytov/sysbench/tar.gz/1.0.17; then
+               echo "Failed to download sysbench-1.0.17.tar.gz, please download it to ${cur_dir} directory manually and try again."
+               exit 1
+           fi
+      fi
+      tar -zxvf 1.0.17 -C /usr/local/ && rm -f 1.0.17
       cd /usr/local/sysbench-1.0.17
       ./autogen.sh
       ./configure --without-mysql
@@ -159,6 +158,7 @@ function Grading_test () {
 	
 function A_key_test () {
       screen iotest
+      Test_environment_initialization
       Get_hardware_and_software_information
       printf '%80s\n' | tr ' ' -
       Network_delay_test
