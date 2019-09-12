@@ -62,12 +62,12 @@ function Test_environment_initialization() {
 }
 
 function Get_hardware_and_software_information () {
-       /usr/bin/bash /tmp/systeminfo.sh
+      /usr/bin/bash /tmp/systeminfo.sh
 }
 
 
 function Network_delay_test () {
-       python /tmp/AWS-ping.py
+      python /tmp/AWS-ping.py
 }
 
 
