@@ -76,7 +76,7 @@ function The_CPU_test () {
       #printf "正在测试，请耐心等待"
       /usr/local/sysbench-1.0.17/src/sysbench cpu --cpu-max-prime=20000 --threads=2 run > /tmp/cpu.log 2>&1
       #clear
-      name13=测试计算素数所需要时间
+      name13=CPU计算素数所需时间
       name14=$(cat /tmp/cpu.log |grep "total time:")
       str7=$name13$name14
       echo $str7
