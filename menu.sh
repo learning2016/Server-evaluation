@@ -11,7 +11,7 @@ function Test_environment_initialization() {
       yum -y install gcc automake autoconf libtool make perl-Time-HiRes perl wget vim screen
       cd $pwd
       wget https://github.com/qcsuper/byte-unixbench/releases/download/v5.1.4/UnixBench-5.1.4.tar.gz
-      tar -zxvf UnixBench5.1.4.tgz
+      tar -zxvf UnixBench-5.1.4.tar.gz && rm -f UnixBench-5.1.4.tar.gz
       cd UnixBench
       make
       cd $pwd
