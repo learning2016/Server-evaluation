@@ -8,7 +8,7 @@
 
 2）下载到需要测试机器的本地并执行
 
-wget -N --no-check-certificate https://raw.githubusercontent.com/learning2016/Server-evaluation/master/menu.sh bash menu.sh
+sudo  wget  -N  --no-check-certificate  https://raw.githubusercontent.com/learning2016/Server-evaluation/master/menu.sh && bash  menu.sh
 
 3）注意事项
 
