@@ -15,3 +15,7 @@ sudo  wget  -N  --no-check-certificate  https://raw.githubusercontent.com/learni
 步骤1是必须执行项
 
 步骤2-8是可选项
+
+4）延伸阅读
+https://blog.csdn.net/gatieme/article/details/50912910
+https://yq.aliyun.com/articles/674729
