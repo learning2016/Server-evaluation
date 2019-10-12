@@ -160,7 +160,7 @@ function Disk_test () {
 function Grading_test () {
       cd /tmp/UnixBench
       ./Run > /tmp/unixbench.log 2>&1
-      name17=评分
+      name17=Unixbench评分
       name18=$(cat /tmp/unixbench.log |grep "System Benchmarks Index Score")
       str9=$name17$name18
       echo $str9
@@ -195,7 +195,7 @@ function menu ()
 `echo -e "\033[33m 4)CPU测试\033[0m"`
 `echo -e "\033[33m 5)内存测试\033[0m"`
 `echo -e "\033[33m 6)磁盘IO测试(预估至少30分钟)\033[0m"`
-`echo -e "\033[33m 7)评分测试(预估至少45分钟)\033[0m"`
+`echo -e "\033[33m 7)Unixbench评分测试(预估至少45分钟)\033[0m"`
 `echo -e "\033[33m 8)一键测试(预估至少75分钟)\033[0m"`
 `echo -e "\033[33m 9)退出\033[0m"`
 EOF
