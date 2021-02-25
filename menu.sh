@@ -63,7 +63,7 @@ function Test_environment_initialization() {
 }
 
 function Get_hardware_and_software_information () {
-      /usr/bin/bash /tmp/systeminfo.sh
+      bash /tmp/systeminfo.sh
 }
 
 
